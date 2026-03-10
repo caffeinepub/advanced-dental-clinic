@@ -35,7 +35,7 @@ const TESTIMONIALS = [
     name: "Ananya Reddy",
     city: "Indore",
     text: "Dr. Verma completely transformed my smile. I feel so confident now — best investment I've ever made in myself!",
-    img: "/assets/generated/patient-1.dim_100x100.jpg",
+    img: "/assets/uploads/shutterstock_167867885-4.jpg",
   },
   {
     name: "Vikram Nair",
@@ -52,6 +52,21 @@ const TRUST = [
   { icon: "✅", label: "5-Year Treatment Warranty" },
 ];
 
+const TECH_IMAGES = [
+  {
+    src: "/assets/uploads/qXBx1WC6aDSeRyC5fkxrSJvCvjaOM65oPxZEOFqpiTAIdxsI9wO2aM1-yj3MN6HE9yAA3ZPji-wuo21plI8HUwLaRQziWa-W9Z2FvKRnqp4-1.jpg",
+    caption: "Advanced Treatment Chair",
+  },
+  {
+    src: "/assets/uploads/qLTul5heUj7PYneAE9P_xQaLwtHv3bSkTSDxWlgdBSEETIy9MyRstPmtV910YrZlEe7AJ842CevJRQAjvwbDEORTDwKGVMyuik8pxEo-BXU-2.jpg",
+    caption: "Modern Clinic Interior",
+  },
+  {
+    src: "/assets/uploads/x1KfRQ08XYDorbXW2fy26vaRHK-NUJP4askxAOdLRYRbtoeE25aSxfzdnu-vTxc-d9gUFHiBREO-H9GyfajnWKugE3w6uTikXmOIITQxtNY-3.jpg",
+    caption: "Digital Diagnostic Equipment",
+  },
+];
+
 export default function HomePage({
   onNavigate,
 }: { onNavigate: (p: string) => void }) {
@@ -65,7 +80,7 @@ export default function HomePage({
         {/* Layer 1 – photo with parallax */}
         <motion.div className="absolute inset-0" style={{ y: heroY }}>
           <img
-            src="/assets/generated/clinic-interior.dim_1200x600.jpg"
+            src="/assets/uploads/shutterstock_167867885-4.jpg"
             alt=""
             className="w-full h-full object-cover object-center"
           />
@@ -298,7 +313,7 @@ export default function HomePage({
               <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
                 <div className="flex -space-x-2">
                   {[
-                    "/assets/generated/patient-1.dim_100x100.jpg",
+                    "/assets/uploads/shutterstock_167867885-4.jpg",
                     "/assets/generated/patient-2.dim_100x100.jpg",
                     "/assets/generated/patient-3.dim_100x100.jpg",
                   ].map((s) => (
@@ -483,6 +498,45 @@ export default function HomePage({
               </button>
             </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ───── TECHNOLOGY SECTION ───── */}
+      <section className="w-full py-24 bg-background mesh-bg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <div className="eyebrow mb-4">Our Clinic</div>
+              <h2
+                className="font-heading font-bold text-dental-blue"
+                style={{ fontSize: "clamp(28px, 4vw, 48px)" }}
+              >
+                State-of-the-Art Technology
+              </h2>
+              <p className="font-body text-dental-blue/55 mt-3 max-w-lg mx-auto">
+                Every treatment is backed by the latest digital equipment for
+                precise, comfortable care.
+              </p>
+            </div>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {TECH_IMAGES.map((img, i) => (
+              <ScrollReveal key={img.caption} delay={i * 0.12}>
+                <div className="group relative overflow-hidden rounded-3xl">
+                  <div className="aspect-video overflow-hidden rounded-3xl">
+                    <img
+                      src={img.src}
+                      alt={img.caption}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="mt-3 text-center font-body text-sm font-semibold text-dental-blue/65">
+                    {img.caption}
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -10,7 +10,7 @@ const T = [
     treatment: "Dental Veneers",
     review:
       "Dr. Verma completely transformed my smile. I was so self-conscious before — now I smile in every photo. The entire team was gentle, professional, and incredibly skilled.",
-    img: "/assets/generated/patient-1.dim_100x100.jpg",
+    img: "/assets/uploads/shutterstock_167867885-4.jpg",
   },
   {
     name: "Vikram Nair",

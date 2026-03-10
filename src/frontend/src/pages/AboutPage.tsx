@@ -44,7 +44,7 @@ export default function AboutPage() {
                 <div className="relative w-72 h-72">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-dental-teal/30 to-dental-blue/20 scale-110 animate-float" />
                   <img
-                    src="/assets/generated/doctor-profile.dim_400x400.jpg"
+                    src="/assets/uploads/mQH-axWaQhN5lu5fhZnw1R2zR2xgoI1eI2joM-NgOiwbTAPWUqv0PRbuTVKsYLD09M9P-npQZ8e3qi_iKdDXx3Ii6JsHag6jelMJXc72nB4-6.jpg"
                     alt="Dr. Neha Verma, BDS MDS"
                     className="relative w-full h-full rounded-full object-cover border-4 border-dental-teal shadow-glow-lg"
                   />
