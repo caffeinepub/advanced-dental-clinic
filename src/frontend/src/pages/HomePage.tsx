@@ -1,14 +1,6 @@
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import AnimatedCounter from "../components/AnimatedCounter";
 import ScrollReveal from "../components/ScrollReveal";
-
-/* ── UI-CRAFT IMPROVEMENT #1: Cinematic Hero ─────────────────────────────
-   Full-bleed clinic photo behind a rich dark overlay stack:
-   • SVG diagonal light-beam pattern at low opacity
-   • Oversized ghost word "SMILE" as typographic texture
-   • 3-tier headline: small italic + huge display + weight contrast
-   • Trust badge strip beneath CTAs
-──────────────────────────────────────────────────────────────────────── */
 
 const TREATMENTS_PREVIEW = [
   {
@@ -41,13 +33,13 @@ const STATS = [
 const TESTIMONIALS = [
   {
     name: "Ananya Reddy",
-    city: "Bangalore",
-    text: "Dr. Sharma completely transformed my smile. I feel so confident now — best investment I've ever made in myself!",
+    city: "Indore",
+    text: "Dr. Verma completely transformed my smile. I feel so confident now — best investment I've ever made in myself!",
     img: "/assets/generated/patient-1.dim_100x100.jpg",
   },
   {
     name: "Vikram Nair",
-    city: "Chennai",
+    city: "Bhopal",
     text: "The implant looks and feels exactly like my natural tooth. Remarkable work and absolutely painless process.",
     img: "/assets/generated/patient-2.dim_100x100.jpg",
   },
@@ -63,20 +55,75 @@ const TRUST = [
 export default function HomePage({
   onNavigate,
 }: { onNavigate: (p: string) => void }) {
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 500], [0, 80]);
+
   return (
-    <main>
+    <main className="w-full">
       {/* ───── HERO ───── */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Layer 1 – photo */}
-        <div className="absolute inset-0">
+        {/* Layer 1 – photo with parallax */}
+        <motion.div className="absolute inset-0" style={{ y: heroY }}>
           <img
             src="/assets/generated/clinic-interior.dim_1200x600.jpg"
             alt=""
             className="w-full h-full object-cover object-center"
           />
-        </div>
+        </motion.div>
         {/* Layer 2 – dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.13_0.07_248/0.97)] via-[oklch(0.15_0.06_245/0.88)] to-[oklch(0.16_0.05_242/0.55)]" />
+
+        {/* Layer 2.5 – animated soft blobs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            animate={{ y: [0, -24, 0], x: [0, 12, 0] }}
+            transition={{
+              duration: 12,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+            className="absolute w-[500px] h-[500px] rounded-full"
+            style={{
+              top: "10%",
+              left: "55%",
+              background:
+                "radial-gradient(circle, oklch(0.63 0.11 192 / 0.08) 0%, transparent 70%)",
+            }}
+          />
+          <motion.div
+            animate={{ y: [0, 18, 0], x: [0, -8, 0] }}
+            transition={{
+              duration: 16,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: 4,
+            }}
+            className="absolute w-[400px] h-[400px] rounded-full"
+            style={{
+              top: "40%",
+              left: "20%",
+              background:
+                "radial-gradient(circle, oklch(0.63 0.11 192 / 0.05) 0%, transparent 70%)",
+            }}
+          />
+          <motion.div
+            animate={{ y: [0, -16, 0] }}
+            transition={{
+              duration: 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: 2,
+            }}
+            className="absolute w-[300px] h-[300px] rounded-full"
+            style={{
+              bottom: "15%",
+              right: "10%",
+              background:
+                "radial-gradient(circle, oklch(0.75 0.08 200 / 0.06) 0%, transparent 70%)",
+            }}
+          />
+        </div>
+
         {/* Layer 3 – diagonal light beams SVG */}
         <div className="absolute inset-0 opacity-[0.04]">
           <svg
@@ -122,133 +169,214 @@ export default function HomePage({
           </span>
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 w-full">
-          <div className="max-w-2xl">
-            {/* Eyebrow */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex items-center gap-3 mb-6"
-            >
-              <span className="w-2 h-2 rounded-full bg-dental-teal animate-pulse" />
-              <span className="font-body text-xs font-bold tracking-[0.22em] uppercase text-dental-teal">
-                Premier Dental Care · Bangalore
-              </span>
-            </motion.div>
-
-            {/* UI-CRAFT #3: 3-tier typographic headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              {/* Line 1 – normal weight, smaller */}
-              <p className="font-heading text-2xl sm:text-3xl font-normal text-white/70 italic leading-none mb-1">
-                Modern dentistry
-              </p>
-              {/* Line 2 – ultra-heavy display */}
-              <h1
-                className="font-heading font-black text-white leading-[0.92] tracking-tight"
-                style={{ fontSize: "clamp(52px, 9vw, 108px)" }}
+        {/* Content – two-column on lg+ */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+            {/* ── LEFT COLUMN: copy ── */}
+            <div>
+              {/* Eyebrow */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="flex items-center gap-3 mb-6"
               >
-                for a<br />
-                <span className="text-dental-teal">Confident</span>
-                <br />
-                Smile.
-              </h1>
-            </motion.div>
+                <span className="w-2 h-2 rounded-full bg-dental-teal animate-pulse" />
+                <span className="font-body text-xs font-bold tracking-[0.22em] uppercase text-dental-teal">
+                  Premier Dental Care · Indore
+                </span>
+              </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="font-body text-white/65 text-lg leading-relaxed mt-6 mb-8 max-w-lg"
-            >
-              Experience world-class dental care with precision technology and
-              compassionate specialists — designed to give you the smile you
-              deserve.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex flex-wrap gap-3"
-            >
-              <button
-                type="button"
-                onClick={() => onNavigate("/book")}
-                data-ocid="home.primary_button"
-                className="px-8 py-3.5 bg-dental-teal text-white font-semibold font-body rounded-2xl hover:shadow-glow-lg hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-[15px]"
+              {/* 3-tier typographic headline */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.2,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               >
-                Book Appointment
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate("/treatments")}
-                data-ocid="home.secondary_button"
-                className="px-8 py-3.5 glass text-white font-semibold font-body rounded-2xl hover:bg-white/15 transition-all duration-200 text-[15px]"
-              >
-                View Treatments →
-              </button>
-            </motion.div>
-
-            {/* Trust badges */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.75 }}
-              className="mt-10 flex flex-wrap gap-3"
-            >
-              {TRUST.map((t) => (
-                <div
-                  key={t.label}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.07] border border-white/10"
+                <p className="font-body text-xl sm:text-2xl font-light text-white/60 tracking-wide mb-2">
+                  Modern dentistry
+                </p>
+                <h1
+                  className="font-heading font-extrabold text-white leading-[0.92] tracking-tight"
+                  style={{
+                    fontSize: "clamp(48px, 7vw, 100px)",
+                    letterSpacing: "-0.03em",
+                  }}
                 >
-                  <span className="text-sm">{t.icon}</span>
-                  <span className="font-body text-xs text-white/60 font-medium">
-                    {t.label}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
-          </div>
+                  for a<br />
+                  <span className="text-dental-teal">Confident</span>
+                  <br />
+                  Smile.
+                </h1>
+              </motion.div>
 
-          {/* Floating social-proof card – desktop only */}
-          <motion.div
-            className="hidden xl:block absolute right-10 bottom-10"
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.9, duration: 0.5 }}
-          >
-            <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
-              <div className="flex -space-x-2">
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.4,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="font-body text-white/65 text-lg leading-relaxed mt-6 mb-8 max-w-lg"
+              >
+                Experience world-class dental care with precision technology and
+                compassionate specialists — designed to give you the smile you
+                deserve.
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="flex flex-wrap gap-3"
+              >
+                <button
+                  type="button"
+                  onClick={() => onNavigate("/book")}
+                  data-ocid="home.primary_button"
+                  className="px-8 py-3.5 bg-dental-teal text-white font-semibold font-body rounded-2xl hover:shadow-glow-lg hover:scale-[1.02] active:scale-[0.97] transition-all duration-200 text-[15px]"
+                >
+                  Book Appointment
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onNavigate("/treatments")}
+                  data-ocid="home.secondary_button"
+                  className="px-8 py-3.5 glass text-white font-semibold font-body rounded-2xl hover:bg-white/15 transition-all duration-200 text-[15px]"
+                >
+                  View Treatments →
+                </button>
+              </motion.div>
+
+              {/* Trust badges */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.75 }}
+                className="mt-10 flex flex-wrap gap-3"
+              >
+                {TRUST.map((t) => (
+                  <div
+                    key={t.label}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.07] border border-white/10"
+                  >
+                    <span className="text-sm">{t.icon}</span>
+                    <span className="font-body text-xs text-white/60 font-medium">
+                      {t.label}
+                    </span>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* ── RIGHT COLUMN: feature cards (lg+ only) ── */}
+            <motion.div
+              className="hidden lg:flex flex-col gap-4"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                delay: 0.5,
+                duration: 0.7,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              {/* Social proof strip */}
+              <div className="glass rounded-2xl px-5 py-4 flex items-center gap-4">
+                <div className="flex -space-x-2">
+                  {[
+                    "/assets/generated/patient-1.dim_100x100.jpg",
+                    "/assets/generated/patient-2.dim_100x100.jpg",
+                    "/assets/generated/patient-3.dim_100x100.jpg",
+                  ].map((s) => (
+                    <img
+                      key={s}
+                      src={s}
+                      alt=""
+                      className="w-9 h-9 rounded-full border-2 border-dental-blue object-cover"
+                    />
+                  ))}
+                </div>
+                <div>
+                  <div className="text-white font-semibold text-sm font-body">
+                    5,000+ smiles
+                  </div>
+                  <div className="text-dental-teal text-xs font-body">
+                    transformed & counting
+                  </div>
+                </div>
+                <div className="ml-auto flex gap-0.5">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <span key={s} className="text-dental-teal text-sm">
+                      ★
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Treatment highlight cards */}
+              {TREATMENTS_PREVIEW.map((t, i) => (
+                <motion.div
+                  key={t.title}
+                  className="glass rounded-2xl px-5 py-4 flex items-center gap-4 cursor-pointer hover:bg-white/10 transition-colors duration-200"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 0.65 + i * 0.12,
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  onClick={() => onNavigate("/treatments")}
+                >
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-dental-teal/30 to-dental-blue/20 flex items-center justify-center text-xl flex-shrink-0">
+                    {t.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-body font-semibold text-white text-sm">
+                      {t.title}
+                    </div>
+                    <div className="font-body text-white/55 text-xs leading-snug mt-0.5 truncate">
+                      {t.desc}
+                    </div>
+                  </div>
+                  <span className="text-dental-teal text-sm flex-shrink-0">
+                    →
+                  </span>
+                </motion.div>
+              ))}
+
+              {/* Quick stat pill */}
+              <div className="glass rounded-2xl px-5 py-4 grid grid-cols-3 gap-3 text-center">
                 {[
-                  "/assets/generated/patient-1.dim_100x100.jpg",
-                  "/assets/generated/patient-2.dim_100x100.jpg",
-                  "/assets/generated/patient-3.dim_100x100.jpg",
+                  { v: "10+", l: "Years" },
+                  { v: "98%", l: "Satisfaction" },
+                  { v: "5★", l: "Rating" },
                 ].map((s) => (
-                  <img
-                    key={s}
-                    src={s}
-                    alt=""
-                    className="w-8 h-8 rounded-full border-2 border-dental-blue object-cover"
-                  />
+                  <div key={s.l}>
+                    <div className="font-heading font-black text-dental-teal text-xl">
+                      {s.v}
+                    </div>
+                    <div className="font-body text-white/50 text-[11px] tracking-wide uppercase">
+                      {s.l}
+                    </div>
+                  </div>
                 ))}
               </div>
-              <div>
-                <div className="text-white font-semibold text-sm font-body">
-                  5,000+ smiles
-                </div>
-                <div className="text-dental-teal text-xs font-body">
-                  transformed & counting
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Wave bottom */}
@@ -256,15 +384,14 @@ export default function HomePage({
           <svg viewBox="0 0 1440 64" fill="none" aria-hidden="true">
             <path
               d="M0 64L60 53C120 42 240 21 360 16C480 11 600 21 720 26.7C840 32 960 32 1080 29.3C1200 27 1320 21 1380 18.7L1440 16V64H0Z"
-              fill="oklch(0.99 0.005 220)"
+              fill="oklch(0.995 0.003 240)"
             />
           </svg>
         </div>
       </section>
 
       {/* ───── STATS ───── */}
-      {/* UI-CRAFT #3: Oversized Playfair numerals with small-caps labels */}
-      <section className="py-20 bg-background">
+      <section className="w-full py-20 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border rounded-3xl overflow-hidden shadow-card">
             {STATS.map((s, i) => (
@@ -290,8 +417,7 @@ export default function HomePage({
       </section>
 
       {/* ───── TREATMENTS PREVIEW ───── */}
-      {/* UI-CRAFT #2: Rich treatment cards with icon backplate + dark hover flip */}
-      <section className="py-24 mesh-bg">
+      <section className="w-full py-24 mesh-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-14">
@@ -312,7 +438,6 @@ export default function HomePage({
             {TREATMENTS_PREVIEW.map((t, i) => (
               <ScrollReveal key={t.title} delay={i * 0.12}>
                 <div className="treatment-card bg-white rounded-3xl p-8 shadow-card cursor-pointer group relative overflow-hidden">
-                  {/* Decorative corner accent */}
                   <div className="absolute top-0 right-0 w-20 h-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div
                       className="absolute top-0 right-0 w-0 h-0"
@@ -323,11 +448,9 @@ export default function HomePage({
                       }}
                     />
                   </div>
-                  {/* Large background number */}
                   <div className="tc-num absolute -bottom-2 -right-1 font-heading font-black text-7xl text-dental-blue/[0.06] select-none transition-colors duration-300">
                     {t.num}
                   </div>
-                  {/* Icon backplate – gradient, not just emoji */}
                   <div
                     className="tc-icon-bg w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5
                     bg-gradient-to-br from-dental-teal/20 to-dental-blue/10 transition-colors duration-300"
@@ -364,8 +487,7 @@ export default function HomePage({
       </section>
 
       {/* ───── TESTIMONIALS PREVIEW ───── */}
-      <section className="py-24 bg-dental-blue relative overflow-hidden">
-        {/* Subtle dot grid */}
+      <section className="w-full py-24 bg-dental-blue relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
@@ -431,7 +553,7 @@ export default function HomePage({
       </section>
 
       {/* ───── CTA BANNER ───── */}
-      <section className="py-24 bg-dental-mint">
+      <section className="w-full py-24 bg-dental-mint">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <ScrollReveal>
             <h2
@@ -448,7 +570,7 @@ export default function HomePage({
                 type="button"
                 onClick={() => onNavigate("/book")}
                 data-ocid="home.primary_button"
-                className="px-10 py-4 bg-dental-teal text-white font-bold font-body rounded-2xl hover:shadow-glow-lg hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-base"
+                className="px-10 py-4 bg-dental-teal text-white font-bold font-body rounded-2xl hover:shadow-glow-lg hover:scale-[1.02] active:scale-[0.97] transition-all duration-200 text-base"
               >
                 Book Appointment
               </button>

@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ["Playfair Display", "Georgia", "serif"],
-        body:    ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        heading: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        body:    ["Sora", "Plus Jakarta Sans", "system-ui", "sans-serif"],
       },
       colors: {
         border:     "oklch(var(--border))",
@@ -88,8 +88,8 @@ export default {
         xs:         "0 1px 2px 0 rgba(0,0,0,0.05)",
         card:       "0 2px 16px rgba(10,37,64,0.07), 0 1px 3px rgba(10,37,64,0.04)",
         hover:      "0 12px 40px rgba(10,37,64,0.14), 0 4px 12px rgba(10,37,64,0.08)",
-        glow:       "0 0 24px rgba(20,184,166,0.38)",
-        "glow-lg":  "0 0 48px rgba(20,184,166,0.28), 0 20px 60px rgba(10,37,64,0.22)",
+        glow:       "0 0 24px rgba(20,184,166,0.32)",
+        "glow-lg":  "0 0 48px rgba(20,184,166,0.22), 0 20px 60px rgba(10,37,64,0.18)",
       },
       keyframes: {
         "accordion-down": {

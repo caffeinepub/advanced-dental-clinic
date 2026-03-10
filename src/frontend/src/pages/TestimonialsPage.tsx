@@ -6,15 +6,15 @@ import ScrollReveal from "../components/ScrollReveal";
 const T = [
   {
     name: "Ananya Reddy",
-    city: "Bangalore",
+    city: "Indore",
     treatment: "Dental Veneers",
     review:
-      "Dr. Sharma completely transformed my smile. I was so self-conscious before — now I smile in every photo. The entire team was gentle, professional, and incredibly skilled.",
+      "Dr. Verma completely transformed my smile. I was so self-conscious before — now I smile in every photo. The entire team was gentle, professional, and incredibly skilled.",
     img: "/assets/generated/patient-1.dim_100x100.jpg",
   },
   {
     name: "Vikram Nair",
-    city: "Chennai",
+    city: "Bhopal",
     treatment: "Dental Implants",
     review:
       "The procedure was absolutely painless, and the implant looks and feels exactly like my natural tooth. Truly remarkable work — I waited too long to get it done!",
@@ -22,7 +22,7 @@ const T = [
   },
   {
     name: "Meera Krishnan",
-    city: "Hyderabad",
+    city: "Ujjain",
     treatment: "Teeth Whitening",
     review:
       "My wedding was coming up and I wanted perfect teeth. The whitening treatment was fast and stunning — 8 shades lighter in one session. I felt like a celebrity!",
@@ -30,15 +30,15 @@ const T = [
   },
   {
     name: "Rajesh Kumar",
-    city: "Mumbai",
+    city: "Jabalpur",
     treatment: "Root Canal Treatment",
     review:
-      "I was terrified of root canals but Dr. Sharma made the experience completely pain-free. Her patience at every step put me fully at ease.",
+      "I was terrified of root canals but Dr. Verma made the experience completely pain-free. Her patience at every step put me fully at ease.",
     img: "/assets/generated/patient-4.dim_100x100.jpg",
   },
   {
     name: "Arjun Patel",
-    city: "Pune",
+    city: "Ratlam",
     treatment: "Clear Aligners",
     review:
       "I wore aligners for 14 months and the results are phenomenal. My teeth are perfectly straight and my confidence has shot through the roof!",

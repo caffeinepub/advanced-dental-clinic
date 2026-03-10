@@ -36,8 +36,8 @@ export default function Navbar({ currentPath, onNavigate }: NavbarProps) {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/96 backdrop-blur-lg shadow-card"
-          : "bg-white/90 backdrop-blur-md"
+          ? "bg-white/95 backdrop-blur-2xl shadow-sm border-b border-black/[0.06]"
+          : "bg-white/80 backdrop-blur-xl"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-[72px]">
@@ -69,20 +69,26 @@ export default function Navbar({ currentPath, onNavigate }: NavbarProps) {
               key={link.path}
               onClick={() => go(link.path)}
               data-ocid="nav.link"
-              className={`px-3.5 py-2 text-sm font-medium rounded-lg font-body transition-all duration-200 ${
+              className={`relative px-3.5 py-2 text-sm font-medium rounded-lg font-body transition-all duration-200 ${
                 currentPath === link.path
-                  ? "text-dental-teal bg-dental-mint"
-                  : "text-dental-blue/80 hover:text-dental-blue hover:bg-dental-mint/60"
+                  ? "text-dental-teal font-semibold"
+                  : "text-dental-blue/70 hover:text-dental-blue hover:bg-black/[0.04]"
               }`}
             >
               {link.label}
+              {currentPath === link.path && (
+                <motion.span
+                  layoutId="nav-indicator"
+                  className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-dental-teal"
+                />
+              )}
             </button>
           ))}
           <button
             type="button"
             onClick={() => go("/book")}
             data-ocid="nav.primary_button"
-            className="ml-3 px-5 py-2.5 bg-dental-teal text-white text-sm font-semibold rounded-xl hover:shadow-glow hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 font-body"
+            className="ml-3 px-5 py-2.5 bg-dental-teal text-white text-sm font-semibold rounded-xl hover:shadow-glow hover:scale-[1.02] active:scale-[0.97] transition-all duration-200 font-body"
           >
             Book Now
           </button>

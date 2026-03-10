@@ -27,7 +27,7 @@ export default function AboutPage() {
               className="font-heading font-bold text-white mb-2"
               style={{ fontSize: "clamp(36px, 6vw, 72px)" }}
             >
-              Dr. Priya Sharma
+              Dr. Neha Verma
             </h1>
             <p className="font-body text-dental-teal text-lg">
               BDS, MDS — Specialist in Prosthodontics &amp; Cosmetic Dentistry
@@ -45,7 +45,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-dental-teal/30 to-dental-blue/20 scale-110 animate-float" />
                   <img
                     src="/assets/generated/doctor-profile.dim_400x400.jpg"
-                    alt="Dr. Priya Sharma, BDS MDS"
+                    alt="Dr. Neha Verma, BDS MDS"
                     className="relative w-full h-full rounded-full object-cover border-4 border-dental-teal shadow-glow-lg"
                   />
                 </div>
@@ -55,7 +55,7 @@ export default function AboutPage() {
                     Award-Winning Dentist
                   </div>
                   <div className="font-body text-dental-blue/50 text-xs mt-0.5">
-                    Best Cosmetic Dentist 2023 — IDA Karnataka
+                    Best Cosmetic Dentist 2023 — IDA Madhya Pradesh
                   </div>
                 </div>
               </div>
@@ -64,14 +64,14 @@ export default function AboutPage() {
             <ScrollReveal direction="left">
               <div>
                 <h2 className="font-heading text-3xl font-bold text-dental-blue mb-1">
-                  Dr. Priya Sharma, BDS MDS
+                  Dr. Neha Verma, BDS MDS
                 </h2>
                 <p className="font-body text-dental-teal font-semibold mb-5">
                   Founder &amp; Chief Dental Surgeon
                 </p>
                 <p className="font-body text-dental-blue/65 leading-relaxed mb-4">
-                  With over a decade of dedicated practice, Dr. Priya Sharma has
-                  established herself as one of Bangalore&apos;s most trusted
+                  With over a decade of dedicated practice, Dr. Neha Verma has
+                  established herself as one of Indore&apos;s most trusted
                   dental specialists. Her patient-first philosophy and
                   relentless pursuit of clinical excellence has helped thousands
                   rediscover their confident smiles.
@@ -151,7 +151,7 @@ export default function AboutPage() {
                 single day.
               </p>
               <div className="mt-5 font-heading font-bold text-dental-blue">
-                — Dr. Priya Sharma
+                — Dr. Neha Verma
               </div>
             </div>
           </ScrollReveal>

@@ -4,6 +4,20 @@
 
 /* ─── Font Faces ─────────────────────────────────────────── */
 @font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/Sora-Variable.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: "Playfair Display";
   src: url("/assets/fonts/PlayfairDisplay-Variable.woff2") format("woff2");
   font-weight: 100 900;
@@ -17,59 +31,52 @@
   font-style: italic;
   font-display: swap;
 }
-@font-face {
-  font-family: "Plus Jakarta Sans";
-  src: url("/assets/fonts/PlusJakartaSans-Variable.woff2") format("woff2");
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* ─── Design Tokens ──────────────────────────────────────── */
 @layer base {
   :root {
-    /* Deep Medical Blue  #0A2540 */
-    --primary:            0.18 0.06 245;
+    /* Softer slate-blue */
+    --primary:            0.20 0.045 248;
     --primary-foreground: 0.99 0 0;
-    /* Teal CTA  #14B8A6 */
-    --secondary:          0.70 0.13 188;
+    /* Softer sage-teal */
+    --secondary:          0.63 0.11 192;
     --secondary-foreground: 0.99 0 0;
-    /* Soft Mint  #DFF6F0 */
-    --accent:             0.96 0.04 185;
-    --accent-foreground:  0.18 0.06 245;
-    /* Near-white bg  #F8FAFC */
-    --background:         0.99 0.005 220;
-    --foreground:         0.18 0.06 245;
+    /* Cooler soft mint */
+    --accent:             0.97 0.02 200;
+    --accent-foreground:  0.20 0.045 248;
+    /* Cleaner white bg */
+    --background:         0.995 0.003 240;
+    --foreground:         0.20 0.045 248;
     --card:               1 0 0;
-    --card-foreground:    0.18 0.06 245;
+    --card-foreground:    0.20 0.045 248;
     --popover:            1 0 0;
-    --popover-foreground: 0.18 0.06 245;
-    --muted:              0.96 0.008 220;
-    --muted-foreground:   0.50 0.03 240;
+    --popover-foreground: 0.20 0.045 248;
+    --muted:              0.97 0.006 220;
+    --muted-foreground:   0.52 0.025 240;
     --destructive:        0.62 0.25 25;
     --destructive-foreground: 0.99 0 0;
-    --border:             0.91 0.01 220;
-    --input:              0.91 0.01 220;
-    --ring:               0.70 0.13 188;
+    --border:             0.92 0.008 230;
+    --input:              0.92 0.008 230;
+    --ring:               0.63 0.11 192;
     --radius:             0.75rem;
-    --chart-1: 0.70 0.13 188;
-    --chart-2: 0.18 0.06 245;
-    --chart-3: 0.96 0.04 185;
+    --chart-1: 0.63 0.11 192;
+    --chart-2: 0.20 0.045 248;
+    --chart-3: 0.97 0.02 200;
     --chart-4: 0.62 0.18 40;
     --chart-5: 0.50 0.15 280;
-    --sidebar:                    0.18 0.06 245;
+    --sidebar:                    0.20 0.045 248;
     --sidebar-foreground:         0.99 0 0;
-    --sidebar-primary:            0.70 0.13 188;
+    --sidebar-primary:            0.63 0.11 192;
     --sidebar-primary-foreground: 0.99 0 0;
-    --sidebar-accent:             0.25 0.07 245;
+    --sidebar-accent:             0.25 0.07 248;
     --sidebar-accent-foreground:  0.99 0 0;
-    --sidebar-border:             0.25 0.05 245;
-    --sidebar-ring:               0.70 0.13 188;
+    --sidebar-border:             0.25 0.05 248;
+    --sidebar-ring:               0.63 0.11 192;
     /* Custom brand tokens */
-    --dblue:  0.18 0.06 245;   /* #0A2540 */
-    --dteal:  0.70 0.13 188;   /* #14B8A6 */
-    --dmint:  0.96 0.04 185;   /* #DFF6F0 */
-    --dnavy:  0.24 0.07 245;   /* mid navy */
+    --dblue:  0.20 0.045 248;   /* softer slate-blue */
+    --dteal:  0.63 0.11 192;    /* softer sage-teal */
+    --dmint:  0.97 0.02 200;    /* cooler soft mint */
+    --dnavy:  0.24 0.07 248;    /* mid navy */
   }
 }
 
@@ -79,12 +86,14 @@
   html { scroll-behavior: smooth; }
   body {
     @apply bg-background text-foreground;
-    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-family: "Sora", "Plus Jakarta Sans", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -97,16 +106,16 @@
 @layer utilities {
 
   /* Typography */
-  .font-heading { font-family: "Playfair Display", Georgia, serif; }
-  .font-body    { font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+  .font-heading { font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+  .font-body    { font-family: "Sora", "Plus Jakarta Sans", system-ui, sans-serif; }
 
-  /* ── Hero gradient – layered dark blue ── */
+  /* ── Hero gradient – softer layered dark blue ── */
   .hero-gradient {
     background:
       linear-gradient(160deg,
-        oklch(0.12 0.07 248) 0%,
-        oklch(0.16 0.06 244) 45%,
-        oklch(0.20 0.05 240) 100%);
+        oklch(0.13 0.06 250) 0%,
+        oklch(0.17 0.055 246) 45%,
+        oklch(0.21 0.04 242) 100%);
   }
 
   /* ── Noise overlay (grain texture) ── */
@@ -138,33 +147,33 @@
   /* ── Shadows ── */
   .shadow-card  { box-shadow: 0 2px 16px rgba(10,37,64,0.07), 0 1px 3px rgba(10,37,64,0.04); }
   .shadow-hover { box-shadow: 0 12px 40px rgba(10,37,64,0.14), 0 4px 12px rgba(10,37,64,0.08); }
-  .shadow-glow  { box-shadow: 0 0 24px rgba(20,184,166,0.38); }
-  .shadow-glow-lg { box-shadow: 0 0 48px rgba(20,184,166,0.28), 0 20px 60px rgba(10,37,64,0.22); }
+  .shadow-glow  { box-shadow: 0 0 24px rgba(20,184,166,0.32); }
+  .shadow-glow-lg { box-shadow: 0 0 48px rgba(20,184,166,0.22), 0 20px 60px rgba(10,37,64,0.18); }
 
   /* ── Mesh section bg ── */
   .mesh-bg {
     background:
-      radial-gradient(ellipse at 15% 40%, oklch(0.96 0.04 185 / 0.45) 0%, transparent 55%),
-      radial-gradient(ellipse at 85% 60%, oklch(0.70 0.13 188 / 0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 15% 40%, oklch(0.97 0.02 200 / 0.5) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 60%, oklch(0.63 0.11 192 / 0.05) 0%, transparent 55%),
       oklch(var(--background));
   }
 
-  /* ── Treatment card hover flip ── */
+  /* ── Treatment card – subtle lift hover ── */
   .treatment-card {
-    transition: transform 0.25s cubic-bezier(.25,.46,.45,.94),
-                box-shadow 0.25s ease,
-                background-color 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.3s ease;
   }
   .treatment-card:hover {
-    transform: translateY(-10px);
-    background-color: oklch(var(--dblue));
-    box-shadow: 0 0 30px rgba(20,184,166,0.25), 0 20px 50px rgba(10,37,64,0.25);
+    transform: translateY(-6px) scale(1.02);
+    background: linear-gradient(135deg, oklch(0.99 0.008 200) 0%, oklch(0.97 0.015 195) 100%);
+    box-shadow: 0 20px 48px rgba(10,37,64,0.12), 0 4px 12px rgba(10,37,64,0.06);
   }
-  .treatment-card:hover .tc-icon-bg  { background: rgba(255,255,255,0.12); }
-  .treatment-card:hover .tc-title    { color: #fff; }
-  .treatment-card:hover .tc-desc     { color: rgba(255,255,255,0.65); }
-  .treatment-card:hover .tc-link     { color: oklch(var(--dteal)); }
-  .treatment-card:hover .tc-num      { color: rgba(255,255,255,0.2); }
+  .treatment-card:hover .tc-icon-bg  { background: oklch(0.63 0.11 192 / 0.15); }
+  .treatment-card:hover .tc-title    { color: oklch(0.20 0.045 248); }
+  .treatment-card:hover .tc-desc     { color: oklch(0.20 0.045 248 / 0.65); }
+  .treatment-card:hover .tc-link     { color: oklch(0.63 0.11 192); }
+  .treatment-card:hover .tc-num      { color: oklch(0.20 0.045 248 / 0.08); }
 
   /* ── Section eyebrow rule ── */
   .eyebrow {
@@ -172,7 +181,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Sora", "Plus Jakarta Sans", sans-serif;
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.22em;
@@ -193,7 +202,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Sora", "Plus Jakarta Sans", sans-serif;
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.22em;
